@@ -5,7 +5,7 @@ react-webpack2-boilerplate
 [![webpack](https://img.shields.io/badge/webpack-2.2.1-brightgreen.svg)](https://webpack.github.io)
 [![react](https://img.shields.io/badge/react-=>15-brightgreen.svg)](https://facebook.github.io/react/)
 [![yarn](https://img.shields.io/badge/yarn-master-brightgreen.svg)](https://yarnpkg.com/en/)
-[![Jest](https://img.shields.io/badge/Jest-=>19-brightgreen.svg)](https://facebook.github.io/jest/)
+[![jest](https://img.shields.io/badge/jest-=>19-brightgreen.svg)](https://facebook.github.io/jest/)
 
 QuickStart (OSX/Unix)
 -----------------------
