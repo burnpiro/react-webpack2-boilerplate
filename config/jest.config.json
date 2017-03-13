@@ -1,0 +1,21 @@
+{
+  "collectCoverageFrom": [
+    "src/**/*.{js,jsx}"
+  ],
+  "testPathIgnorePatterns": [
+    "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
+  ],
+  "testEnvironment": "node",
+  "testURL": "http://localhost",
+  "transform": {
+    "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\.css$": "<rootDir>/config/cssTransform.js",
+    "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/fileTransform.js"
+  },
+  "transformIgnorePatterns": [
+    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+  ],
+  "moduleNameMapper": {
+    "^react-native$": "react-native-web"
+  }
+}
