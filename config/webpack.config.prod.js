@@ -2,8 +2,9 @@ const webpack = require('webpack');
 const paths = require('./paths');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-var ManifestPlugin = require('webpack-manifest-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 process.env.NODE_ENV = 'production';
 process.env.PUBLIC_URL = '';
@@ -18,6 +19,7 @@ const shouldUseRelativeAssetPaths = publicPath === './';
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
 const publicUrl = publicPath.slice(0, -1);
+const cssFilename = 'static/css/[name].[contenthash:8].css';
 
 const plugins = [
   // Makes some environment variables available in index.html.
@@ -47,6 +49,7 @@ const plugins = [
       minifyURLs: true,
     },
   }),
+  new ExtractTextPlugin(cssFilename),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
@@ -94,7 +97,7 @@ module.exports = {
   output: {
     path: paths.appBuild,
     pathinfo: true,
-    filename: 'static/js/[name].bundle.js',
+    filename: 'static/js/[name].[hash:8].bundle.js',
     publicPath: publicPath
   },
   resolve: {
@@ -141,31 +144,33 @@ module.exports = {
       // In production, we use a plugin to extract that CSS to a file
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+              },
             },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                }),
-              ],
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                plugins: () => [
+                  autoprefixer({
+                    browsers: [
+                      '>1%',
+                      'last 4 versions',
+                      'Firefox ESR',
+                      'not ie < 9', // React doesn't support IE8 anyway
+                    ],
+                  }),
+                ],
+              },
             },
-          },
-        ],
+          ]
+        }),
       },
       // Process JS with Babel.
       {

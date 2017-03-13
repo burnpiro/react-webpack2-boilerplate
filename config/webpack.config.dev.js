@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const paths = require('./paths');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
 process.env.NODE_ENV = 'development';
@@ -17,6 +18,7 @@ const publicUrl = '';
 const port = process.env.POST || 3000;
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || 'localhost';
+const cssFilename = 'static/css/[name].[contenthash:8].css';
 
 const plugins = [
   // Makes some environment variables available in index.html.
@@ -35,6 +37,7 @@ const plugins = [
     inject: true,
     template: paths.appHtml,
   }),
+  new ExtractTextPlugin(cssFilename),
   // enable HMR globally
   new webpack.HotModuleReplacementPlugin(),
   // prints more readable module names in the browser console on HMR updates
@@ -53,7 +56,7 @@ module.exports = {
   output: {
     path: paths.appBuild,
     pathinfo: true,
-    filename: 'static/js/[name].bundle.js',
+    filename: 'static/js/[name].[hash:8].bundle.js',
     publicPath: publicPath
   },
   resolve: {
@@ -101,31 +104,33 @@ module.exports = {
       // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+              },
             },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                }),
-              ],
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                plugins: () => [
+                  autoprefixer({
+                    browsers: [
+                      '>1%',
+                      'last 4 versions',
+                      'Firefox ESR',
+                      'not ie < 9', // React doesn't support IE8 anyway
+                    ],
+                  }),
+                ],
+              },
             },
-          },
-        ],
+          ]
+        }),
       },
       // Process JS with Babel.
       {
