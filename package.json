@@ -5,7 +5,7 @@
   "author": "Kemal Erdem",
   "license": "MIT",
   "engines": {
-    "node": ">= 6"
+    "node": "7.7.2"
   },
   "scripts": {
     "test": "node scripts/test.js --env=jsdom --config=config/jest.config.json",

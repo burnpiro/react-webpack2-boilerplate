@@ -1,7 +1,11 @@
 react-webpack2-boilerplate
 ============
 
-[![node](https://img.shields.io/badge/node-7.7.2-brightgreen.svg)]()
+[![node](https://img.shields.io/badge/node-=>7-brightgreen.svg)](https://nodejs.org/en/)
+[![webpack](https://img.shields.io/badge/webpack-2.2.1-brightgreen.svg)](https://webpack.github.io)
+[![react](https://img.shields.io/badge/react-=>15-brightgreen.svg)](https://facebook.github.io/react/)
+[![yarn](https://img.shields.io/badge/yarn-master-brightgreen.svg)](https://yarnpkg.com/en/)
+[![Jest](https://img.shields.io/badge/Jest-=>19-brightgreen.svg)](https://facebook.github.io/jest/)
 
 QuickStart (OSX/Unix)
 -----------------------
@@ -32,10 +36,3 @@ Remember when writing tests:
 - Name your unit test file `foo.test.js`, where `foo` is the name of the component
 - Only unit test app logic, not React.
 - Keep components as separate as possible to help others with testing
-
-Stack
-----------
-- [React](https://facebook.github.io/react/) Just some liv
-- [yarn](https://yarnpkg.com/en/) To manage npm dependencies
-- [Webpack](https://webpack.github.io) Builder/Server
-- [Jest](https://facebook.github.io/jest/) Testing
