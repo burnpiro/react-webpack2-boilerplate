@@ -8,7 +8,7 @@ react-webpack2-boilerplate
 [![jest](https://img.shields.io/badge/jest-=>19-brightgreen.svg)](https://facebook.github.io/jest/)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
  
-QuickStart (OSX/Unix)
+QuickStart
 -----------------------
 
 Just couple instructions to run boilerplate quickly :)
